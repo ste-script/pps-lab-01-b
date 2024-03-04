@@ -11,23 +11,32 @@ public class LogicTest {
   @Test
   public void testKnightInitialPosition() {
     Logics logics = new LogicsImpl(boardSize);
-    assertTrue(testBiPredicateOverAllPositions(logics::hasKnight));
+    Pair<Integer, Integer> knight = findPieceInBoard(logics, logics::hasKnight);
+    assertTrue(logics.hasKnight(knight.getX(), knight.getY()));
   }
 
   @Test
   public void testPawnInitialPosition() {
     Logics logics = new LogicsImpl(boardSize);
-    assertTrue(testBiPredicateOverAllPositions(logics::hasPawn));
+    Pair<Integer, Integer> pawn = findPieceInBoard(logics, logics::hasPawn);
+    assertTrue(logics.hasPawn(pawn.getX(), pawn.getY()));
   }
 
-  private boolean testBiPredicateOverAllPositions(BiPredicate<Integer, Integer> p) {
+  @Test
+  public void testHitOutOfBounds() {
+    Logics logics = new LogicsImpl(boardSize);
+    assertThrows(IndexOutOfBoundsException.class, () -> logics.hit(-1, 0));
+  }
+
+  private Pair<Integer, Integer> findPieceInBoard(Logics logics, BiPredicate<Integer, Integer> p) {
     for (int i = 0; i < boardSize; i++) {
       for (int j = 0; j < boardSize; j++) {
         if (p.test(i, j)) {
-          return true;
+          return new Pair<>(i, j);
         }
       }
     }
-    return false;
+    throw new IllegalStateException("Piece not found");
   }
+
 }
