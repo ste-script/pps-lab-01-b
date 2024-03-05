@@ -1,15 +1,27 @@
 package e1;
 
-public class Knight extends AbstractChessPiece {
+public class Knight implements ChessPiece {
 
-    @Override
+    private ChessPiece knight;
+
+    public Knight() {
+        this.knight = new ChessPieceImpl(new KnightMoveStrategy());
+    }
+
+    public Pair<Integer, Integer> getPosition() {
+        return knight.getPosition();
+    }
+
     public boolean isValidMove(int row, int col) {
-        int x = row - this.position.getX();
-        int y = col - this.position.getY();
-        if (x != 0 && y != 0 && Math.abs(x) + Math.abs(y) == 3) {
-            return true;
-        }
-        return false;
+        return knight.isValidMove(row, col);
+    }
+
+    public void setPosition(int row, int col) {
+        knight.setPosition(row, col);
+    }
+
+    public boolean isAtPosition(int row, int col) {
+        return knight.isAtPosition(row, col);
     }
 
 }

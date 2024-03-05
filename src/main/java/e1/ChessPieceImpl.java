@@ -1,16 +1,23 @@
 package e1;
 
-abstract public class AbstractChessPiece implements ChessPiece {
+public class ChessPieceImpl implements ChessPiece {
 
     protected Pair<Integer, Integer> position;
+    private MoveStrategy moveStrategy;
 
-    public AbstractChessPiece() {
+    public ChessPieceImpl(MoveStrategy moveStrategy) {
         this.position = new Pair<>(0, 0);
+        this.moveStrategy = moveStrategy;
     }
 
     @Override
     public Pair<Integer, Integer> getPosition() {
         return this.position;
+    }
+
+    @Override
+    public boolean isValidMove(int row, int col) {
+        return this.moveStrategy.isValidMove(row, col, this.position);
     }
 
     @Override
