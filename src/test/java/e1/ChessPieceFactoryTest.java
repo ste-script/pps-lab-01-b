@@ -2,6 +2,7 @@ package e1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +12,12 @@ public class ChessPieceFactoryTest {
 
     @Test
     public void testCreatePawn() {
-        assertNotNull(factory.createPawn());
+        assertTrue(factory.createCustomPositionPawn(0, 0).isAtPosition(0, 0));
     }
 
     @Test
     public void testCreateKnight() {
-        assertNotNull(factory.createKnight());
+        assertTrue(factory.createCustomPositionKnight(0, 0).isAtPosition(0, 0));
     }
 
     @Test

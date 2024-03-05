@@ -2,9 +2,9 @@ package e1;
 
 public interface ChessPieceFactory {
 
-    ChessPiece createPawn();
+    ChessPiece createCustomPositionPawn(int x, int y);
 
-    ChessPiece createKnight();
+    ChessPiece createCustomPositionKnight(int x, int y);
 
     ChessPiece createRandomPositionPawn(int size);
 

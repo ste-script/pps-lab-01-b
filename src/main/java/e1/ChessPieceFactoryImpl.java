@@ -11,16 +11,6 @@ public class ChessPieceFactoryImpl implements ChessPieceFactory {
     }
 
     @Override
-    public ChessPiece createPawn() {
-        return new Pawn();
-    }
-
-    @Override
-    public ChessPiece createKnight() {
-        return new Knight();
-    }
-
-    @Override
     public ChessPiece createRandomPositionPawn(int size) {
         var pawn = new Pawn();
         var randomPawnPosition = new Pair<>(random.nextInt(size), random.nextInt(size));
@@ -36,6 +26,20 @@ public class ChessPieceFactoryImpl implements ChessPieceFactory {
             randomKnightPosition = new Pair<>(random.nextInt(size), random.nextInt(size));
         }
         knight.setPosition(randomKnightPosition.getX(), randomKnightPosition.getY());
+        return knight;
+    }
+
+    @Override
+    public ChessPiece createCustomPositionPawn(int x, int y) {
+        var pawn = new Pawn();
+        pawn.setPosition(x, y);
+        return pawn;
+    }
+
+    @Override
+    public ChessPiece createCustomPositionKnight(int x, int y) {
+        var knight = new Knight();
+        knight.setPosition(x, y);
         return knight;
     }
 
