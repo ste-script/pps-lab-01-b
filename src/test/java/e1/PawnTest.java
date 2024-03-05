@@ -1,22 +1,22 @@
 package e1;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class KnightTest extends ChessPieceTestImpl {
+public class PawnTest extends ChessPieceTestImpl {
 
     @BeforeEach
     public void setUp() {
-        this.piece = new Knight();
+        this.piece = new Pawn();
     }
 
     @Override
     @Test
     public void testValidMove() {
         piece.setPosition(0, 0);
-        assertTrue(piece.isValidMove(2, 1));
+        assertFalse(piece.isValidMove(2, 1));
     }
 
 }

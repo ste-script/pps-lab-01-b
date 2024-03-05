@@ -17,13 +17,6 @@ abstract public class ChessPieceTestImpl implements ChessPieceTest {
 
     @Override
     @Test
-    public void testValidMove() {
-        piece.setPosition(0, 0);
-        assertTrue(piece.isValidMove(2, 1));
-    }
-
-    @Override
-    @Test
     public void testInvalidMove() {
         piece.setPosition(0, 0);
         assertFalse(piece.isValidMove(2, 2));
