@@ -28,6 +28,14 @@ public class LogicTest {
     assertThrows(IndexOutOfBoundsException.class, () -> logics.hit(-1, 0));
   }
 
+  @Test
+  public void testWinWithFixedPositions(){
+    Pair<Integer, Integer> pawn = new Pair<>(0, 0);
+    Pair<Integer, Integer> knight = new Pair<>(2, 1);
+    Logics logics = new LogicsImpl(boardSize, pawn, knight);
+    assertTrue(logics.hit(pawn.getX(), pawn.getY()));
+  }
+
   private Pair<Integer, Integer> findPieceInBoard(Logics logics, BiPredicate<Integer, Integer> p) {
     for (int i = 0; i < boardSize; i++) {
       for (int j = 0; j < boardSize; j++) {
