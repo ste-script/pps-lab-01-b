@@ -29,11 +29,19 @@ public class LogicTest {
   }
 
   @Test
-  public void testWinWithFixedPositions(){
+  public void testWinWithFixedPositions() {
     Pair<Integer, Integer> pawn = new Pair<>(0, 0);
     Pair<Integer, Integer> knight = new Pair<>(2, 1);
     Logics logics = new LogicsImpl(boardSize, pawn, knight);
     assertTrue(logics.hit(pawn.getX(), pawn.getY()));
+  }
+
+  @Test
+  public void testInvalidHit() {
+    Pair<Integer, Integer> pawn = new Pair<>(0, 0);
+    Pair<Integer, Integer> knight = new Pair<>(2, 2);
+    Logics logics = new LogicsImpl(boardSize, pawn, knight);
+    assertFalse(logics.hit(knight.getX(), knight.getY()));
   }
 
   private Pair<Integer, Integer> findPieceInBoard(Logics logics, BiPredicate<Integer, Integer> p) {
