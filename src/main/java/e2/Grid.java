@@ -1,6 +1,6 @@
 package e2;
 
-public interface Grid {
+public interface Grid extends Iterable<Cell> {
 
     Cell getCell(Pair<Integer, Integer> position);
 

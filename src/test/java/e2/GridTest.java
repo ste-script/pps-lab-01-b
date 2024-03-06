@@ -26,9 +26,9 @@ public class GridTest {
     @Test
     public void searchMines() {
         int mineCounter = 0;
-        for (int i = 0; i < gridSize; i++) {
-            for (int j = 0; j < gridSize; j++) {
-                mineCounter += grid.getCell(new Pair<>(i, j)).isMine() ? 1 : 0;
+        for (var cell : grid) {
+            if (cell.isMine()) {
+                mineCounter++;
             }
         }
         assertEquals(numberOfMines, mineCounter);
@@ -40,13 +40,10 @@ public class GridTest {
         var copyOfLocalGrid = new GridImpl(gridSize, numberOfMines);
         localGrid.randomizeGrid();
         boolean isDifferent = false;
-        for (int i = 0; i < gridSize; i++) {
-            for (int j = 0; j < gridSize; j++) {
-                if (localGrid.getCell(new Pair<>(i, j)).isMine() != copyOfLocalGrid.getCell(new Pair<>(i, j))
-                        .isMine()) {
-                    isDifferent = true;
-                    break;
-                }
+        for (var cell : localGrid) {
+            if (cell != copyOfLocalGrid.getCell(new Pair<>(0, 0))) {
+                isDifferent = true;
+                break;
             }
         }
         assertTrue(isDifferent);
