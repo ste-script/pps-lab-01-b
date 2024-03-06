@@ -8,14 +8,12 @@ import java.util.List;
 public class GridImpl implements Grid {
 
     private int gridSize;
-    private int numberOfMines;
     private List<Cell> grid;
 
     public GridImpl(int gridSize, int numberOfMines) {
         this.gridSize = gridSize;
-        this.numberOfMines = numberOfMines;
         grid = new ArrayList<>();
-        createOrderedGrid();
+        createOrderedGrid(numberOfMines);
     }
 
     @Override
@@ -41,7 +39,7 @@ public class GridImpl implements Grid {
         return mineCounter;
     }
 
-    private void createOrderedGrid() {
+    private void createOrderedGrid(int numberOfMines) {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 if (numberOfMines > 0) {
