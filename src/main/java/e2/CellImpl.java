@@ -2,20 +2,27 @@ package e2;
 
 public class CellImpl implements Cell {
 
-    public CellImpl(CellType mine, String string) {
-        //TODO Auto-generated constructor stub
+    private final CellType type;
+    private final String text;
+
+    public CellImpl(CellType mine, String text) {
+        this.type = mine;
+        this.text = text;
     }
 
     @Override
     public String getText() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getText'");
+        return text;
     }
 
     @Override
     public CellType getType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getType'");
+        return type;
+    }
+
+    @Override
+    public boolean isMine() {
+        return type == CellType.MINE;
     }
 
 }

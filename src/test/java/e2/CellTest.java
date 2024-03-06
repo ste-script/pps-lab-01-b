@@ -11,4 +11,22 @@ public class CellTest {
         Cell cell = new CellImpl(CellType.MINE, "X");
         assertEquals(CellType.MINE, cell.getType());
     }
+
+    @Test
+    public void createSafeCell() {
+        Cell cell = new CellImpl(CellType.SAFE, "0");
+        assertEquals(CellType.SAFE, cell.getType());
+    }
+
+    @Test
+    public void getCellText() {
+        Cell cell = new CellImpl(CellType.SAFE, "0");
+        assertEquals("0", cell.getText());
+    }
+
+    @Test
+    public void isMine() {
+        Cell cell = new CellImpl(CellType.MINE, "X");
+        assertEquals(true, cell.isMine());
+    }
 }
