@@ -72,11 +72,14 @@ public class LogicsImpl implements Logics {
         for (int i = position.getX() - 1; i <= position.getX() + 1; i++) {
             for (int j = position.getY() - 1; j <= position.getY() + 1; j++) {
                 if (i >= 0 && i < this.size && j >= 0 && j < this.size) {
-                    var cell = this.grid.getCell(new Pair<>(i, j));
+                    var cellPosition = new Pair<>(i, j);
+                    var cell = this.grid.getCell(cellPosition);
                     if (!cell.isTriggered() && !cell.isMine()) {
                         cell.trigger();
+                        cell.setText(Integer.toString(this.grid.getNumberOfAdiacentMines(cellPosition)));
+
                         if (grid.getNumberOfAdiacentMines(new Pair<Integer, Integer>(i, j)) == 0) {
-                            recursiveTriggerAdiacentCells(new Pair<>(i, j));
+                            recursiveTriggerAdiacentCells(cellPosition);
                         }
                     }
                 }

@@ -26,15 +26,14 @@ public class GUI extends JFrame {
         ActionListener onClick = (e) -> {
             final JButton bt = (JButton) e.getSource();
             final Pair<Integer, Integer> pos = buttons.get(bt);
-            boolean aMineWasFound = false; // call the logic here to tell it that cell at 'pos' has been seleced
-            if (aMineWasFound) {
+            logics.triggerCell(pos);
+            if (logics.isLoseCondition()) {
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You lost!!");
             } else {
                 drawBoard();
             }
-            boolean isThereVictory = false; // call the logic here to ask if there is victory
-            if (isThereVictory) {
+            if (logics.isWinCondition()) {
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You won!!");
                 System.exit(0);
@@ -47,7 +46,11 @@ public class GUI extends JFrame {
                 final JButton bt = (JButton) e.getSource();
                 if (bt.isEnabled()) {
                     final Pair<Integer, Integer> pos = buttons.get(bt);
-                    // call the logic here to put/remove a flag
+                    if (bt.getText().equals("F")) {
+                        bt.setText(" ");
+                    } else {
+                        bt.setText("F");
+                    }
                 }
                 drawBoard();
             }
@@ -67,11 +70,13 @@ public class GUI extends JFrame {
     }
 
     private void quitGame() {
-        this.drawBoard();
+        var grid = logics.getGrid();
         for (var entry : this.buttons.entrySet()) {
             // call the logic here
             // if this button is a mine, draw it "*"
             // disable the button
+            entry.getKey().setText(grid.getCell(entry.getValue()).getText());
+            entry.getKey().setEnabled(false);
         }
     }
 
@@ -81,7 +86,10 @@ public class GUI extends JFrame {
             // call the logic here
             // if this button is a cell with counter, put the number
             // if this button has a flag, put the flag
-            entry.getKey().setText(grid.getCell(entry.getValue()).getText());
+            if (grid.getCell(entry.getValue()).isTriggered()) {
+                entry.getKey().setText(grid.getCell(entry.getValue()).getText());
+                entry.getKey().setEnabled(false);
+            }
         }
     }
 

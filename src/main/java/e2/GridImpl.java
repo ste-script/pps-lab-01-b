@@ -24,6 +24,7 @@ public class GridImpl implements Grid {
     @Override
     public void randomizeGrid() {
         Collections.shuffle(grid);
+        writeAdiacents();
     }
 
     @Override
@@ -43,10 +44,23 @@ public class GridImpl implements Grid {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 if (numberOfMines > 0) {
-                    grid.add(new CellImpl(CellType.MINE, "X"));
+                    grid.add(new CellImpl(CellType.MINE, ""));
                     numberOfMines--;
                 } else {
                     grid.add(new CellImpl(CellType.SAFE, ""));
+                }
+            }
+        }
+        writeAdiacents();
+    }
+
+    private void writeAdiacents() {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                if (!grid.get(i * gridSize + j).isMine()) {
+                    grid.get(i * gridSize + j).setText(Integer.toString(getNumberOfAdiacentMines(new Pair<>(i, j))));
+                } else {
+                    grid.get(i * gridSize + j).setText("X");
                 }
             }
         }

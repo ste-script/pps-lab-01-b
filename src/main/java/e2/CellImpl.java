@@ -3,7 +3,7 @@ package e2;
 public class CellImpl implements Cell {
 
     private final CellType type;
-    private final String text;
+    private String text;
     private boolean triggered;
 
     public CellImpl(CellType mine, String text) {
@@ -34,6 +34,11 @@ public class CellImpl implements Cell {
     @Override
     public void trigger() {
         this.triggered = true;
+    }
+
+    @Override
+    public void setText(String text) {
+        this.text = text;
     }
 
 }
