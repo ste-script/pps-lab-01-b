@@ -12,7 +12,7 @@ public class ChessPieceFactoryImpl implements ChessPieceFactory {
 
     @Override
     public ChessPiece createRandomPositionPawn(int size) {
-        var pawn = new Pawn();
+        var pawn = new PawnChessPiece();
         var randomPawnPosition = new Pair<>(random.nextInt(size), random.nextInt(size));
         pawn.setPosition(randomPawnPosition.getX(), randomPawnPosition.getY());
         return pawn;
@@ -20,7 +20,7 @@ public class ChessPieceFactoryImpl implements ChessPieceFactory {
 
     @Override
     public ChessPiece createRandomPositionKnightNotOnPawn(int size, Pair<Integer, Integer> pawnPosition) {
-        var knight = new Knight();
+        var knight = new KnightChessPiece();
         var randomKnightPosition = new Pair<>(random.nextInt(size), random.nextInt(size));
         while (randomKnightPosition.equals(pawnPosition)) {
             randomKnightPosition = new Pair<>(random.nextInt(size), random.nextInt(size));
@@ -31,14 +31,14 @@ public class ChessPieceFactoryImpl implements ChessPieceFactory {
 
     @Override
     public ChessPiece createCustomPositionPawn(int x, int y) {
-        var pawn = new Pawn();
+        var pawn = new PawnChessPiece();
         pawn.setPosition(x, y);
         return pawn;
     }
 
     @Override
     public ChessPiece createCustomPositionKnight(int x, int y) {
-        var knight = new Knight();
+        var knight = new KnightChessPiece();
         knight.setPosition(x, y);
         return knight;
     }

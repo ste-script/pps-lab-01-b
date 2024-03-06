@@ -1,10 +1,10 @@
 package e1;
 
-public class Pawn implements ChessPiece {
+public class PawnChessPiece implements ChessPiece {
 
     private ChessPiece pawn;
 
-    public Pawn() {
+    public PawnChessPiece() {
         this.pawn = new ChessPieceImpl(new PawnMoveStrategy());
     }
 

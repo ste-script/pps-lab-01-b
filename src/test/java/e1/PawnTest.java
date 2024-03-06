@@ -9,7 +9,7 @@ public class PawnTest extends ChessPieceTestImpl {
 
     @BeforeEach
     public void setUp() {
-        this.piece = new Pawn();
+        this.piece = new PawnChessPiece();
     }
 
     @Override

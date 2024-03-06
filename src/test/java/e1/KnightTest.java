@@ -9,7 +9,7 @@ public class KnightTest extends ChessPieceTestImpl {
 
     @BeforeEach
     public void setUp() {
-        this.piece = new Knight();
+        this.piece = new KnightChessPiece();
     }
 
     @Override

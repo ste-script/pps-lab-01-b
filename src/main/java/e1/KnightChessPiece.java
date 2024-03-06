@@ -1,10 +1,10 @@
 package e1;
 
-public class Knight implements ChessPiece {
+public class KnightChessPiece implements ChessPiece {
 
     private ChessPiece knight;
 
-    public Knight() {
+    public KnightChessPiece() {
         this.knight = new ChessPieceImpl(new KnightMoveStrategy());
     }
 
