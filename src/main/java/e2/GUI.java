@@ -5,6 +5,7 @@ import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.MouseInputListener;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -75,9 +76,13 @@ public class GUI extends JFrame {
             // call the logic here
             // if this button is a mine, draw it "*"
             // disable the button
-            entry.getKey().setText(grid.getCell(entry.getValue()).getText());
-            entry.getKey().setEnabled(false);
+            writeValueAndDisable(grid, entry);
         }
+    }
+
+    private void writeValueAndDisable(Grid grid, Entry<JButton, Pair<Integer, Integer>> entry) {
+        entry.getKey().setText(grid.getCell(entry.getValue()).getText());
+        entry.getKey().setEnabled(false);
     }
 
     private void drawBoard() {
@@ -87,8 +92,7 @@ public class GUI extends JFrame {
             // if this button is a cell with counter, put the number
             // if this button has a flag, put the flag
             if (grid.getCell(entry.getValue()).isTriggered()) {
-                entry.getKey().setText(grid.getCell(entry.getValue()).getText());
-                entry.getKey().setEnabled(false);
+                writeValueAndDisable(grid, entry);
             }
         }
     }
