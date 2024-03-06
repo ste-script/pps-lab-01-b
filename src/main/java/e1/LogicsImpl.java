@@ -29,12 +29,6 @@ public class LogicsImpl implements Logics {
 		return false;
 	}
 
-	private void checkIsOutOfBound(int row, int col) {
-		if (row < 0 || col < 0 || row >= this.size || col >= this.size) {
-			throw new IndexOutOfBoundsException();
-		}
-	}
-
 	@Override
 	public boolean hasKnight(int row, int col) {
 		return this.knight.isAtPosition(row, col);
@@ -43,5 +37,11 @@ public class LogicsImpl implements Logics {
 	@Override
 	public boolean hasPawn(int row, int col) {
 		return this.pawn.isAtPosition(row, col);
+	}
+
+	private void checkIsOutOfBound(int row, int col) {
+		if (row < 0 || col < 0 || row >= this.size || col >= this.size) {
+			throw new IndexOutOfBoundsException();
+		}
 	}
 }
