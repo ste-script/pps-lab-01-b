@@ -47,7 +47,7 @@ public class GridImpl implements Grid {
                     grid.add(new CellImpl(CellType.MINE, "X"));
                     numberOfMines--;
                 } else {
-                    grid.add(new CellImpl(CellType.SAFE, "0"));
+                    grid.add(new CellImpl(CellType.SAFE, ""));
                 }
             }
         }

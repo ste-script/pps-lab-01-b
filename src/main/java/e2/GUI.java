@@ -5,7 +5,6 @@ import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.MouseInputListener;
 
 import java.util.*;
-import java.util.Map.Entry;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -17,7 +16,7 @@ public class GUI extends JFrame {
     private final Logics logics;
 
     public GUI(int size) {
-        this.logics = new LogicsImpl(size);
+        this.logics = new LogicsImpl(size, GameLogicDifficulty.EASY);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(100 * size, 100 * size);
 
