@@ -21,14 +21,18 @@ public class LogicsImpl implements Logics {
 
 	@Override
 	public boolean hit(int row, int col) {
-		if (row < 0 || col < 0 || row >= this.size || col >= this.size) {
-			throw new IndexOutOfBoundsException();
-		}
+		checkIsOutOfBound(row, col);
 		if (this.knight.isValidMove(row, col)) {
 			this.knight.setPosition(row, col);
 			return this.pawn.isAtPosition(row, col);
 		}
 		return false;
+	}
+
+	private void checkIsOutOfBound(int row, int col) {
+		if (row < 0 || col < 0 || row >= this.size || col >= this.size) {
+			throw new IndexOutOfBoundsException();
+		}
 	}
 
 	@Override
