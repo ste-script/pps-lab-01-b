@@ -26,4 +26,17 @@ public class LogicsTest {
         assertEquals(sizeCounter, size * size);
     }
 
+    @Test
+    public void isWinCondition() {
+        var localLogics = new LogicsImpl(8, 1);
+        localLogics.triggerCell(new Pair<>(0, 1));
+        assertEquals(true, localLogics.isWinCondition());
+    }
+
+    @Test
+    public void isLoseCondition() {
+        var localLogics = new LogicsImpl(8, 1);
+        localLogics.triggerCell(new Pair<>(0, 0));
+        assertEquals(true, logics.isLoseCondition());
+    }
 }

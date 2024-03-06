@@ -5,16 +5,32 @@ public class LogicsImpl implements Logics {
     private final Grid grid;
     private final int size;
     private final GameLogicDifficulty difficulty;
+    private final int numberOfMines;
 
     public LogicsImpl(int size, GameLogicDifficulty difficulty) {
         this.size = size;
         this.difficulty = difficulty;
-        this.grid = new GridImpl(size, getNumberOfMines());
+        this.numberOfMines = calculateNumberOfMines();
+        this.grid = new GridImpl(size, this.numberOfMines);
         this.grid.randomizeGrid();
     }
 
-    private int getNumberOfMines() {
-        return ((size * size) / 2) * difficulty.getValue() / 100;
+    public LogicsImpl(int size, int numberOfMines) {
+        this.size = size;
+        this.difficulty = GameLogicDifficulty.EASY;
+        this.numberOfMines = numberOfMines;
+        checkValidNumberOfMines();
+        this.grid = new GridImpl(size, numberOfMines);
+    }
+
+    private void checkValidNumberOfMines() {
+        if (this.numberOfMines <= 0 || this.numberOfMines > (this.size * this.size) / 2) {
+            throw new IllegalArgumentException("Invalid number of mines");
+        }
+    }
+
+    private int calculateNumberOfMines() {
+        return ((this.size * this.size) / 2) * difficulty.getValue() / 100;
     }
 
     @Override
@@ -24,20 +40,47 @@ public class LogicsImpl implements Logics {
 
     @Override
     public boolean isWinCondition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isWinCondition'");
+        int safeCounter = 0;
+        for (var cell : this.grid) {
+            if (!cell.isMine() && cell.isTriggered()) {
+                safeCounter++;
+            }
+        }
+        return safeCounter == (this.size * this.size) - this.numberOfMines;
     }
 
     @Override
     public boolean isLoseCondition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isLoseCondition'");
+        for (var cell : this.grid) {
+            if (cell.isMine() && cell.isTriggered()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void triggerCell(Pair<Integer, Integer> position) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'triggerCell'");
+        var cell = this.grid.getCell(position);
+        cell.trigger();
+        if (!cell.isMine()) {
+            recursiveTriggerAdiacentCells(position);
+        }
     }
 
+    private void recursiveTriggerAdiacentCells(Pair<Integer, Integer> position) {
+        for (int i = position.getX() - 1; i <= position.getX() + 1; i++) {
+            for (int j = position.getY() - 1; j <= position.getY() + 1; j++) {
+                if (i >= 0 && i < this.size && j >= 0 && j < this.size) {
+                    var cell = this.grid.getCell(new Pair<>(i, j));
+                    if (!cell.isTriggered() && !cell.isMine()) {
+                        cell.trigger();
+                        if (grid.getNumberOfAdiacentMines(new Pair<Integer, Integer>(i, j)) == 0) {
+                            recursiveTriggerAdiacentCells(new Pair<>(i, j));
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -8,4 +8,8 @@ public interface Cell {
 
     boolean isMine();
 
+    boolean isTriggered();
+
+    void trigger();
+
 }

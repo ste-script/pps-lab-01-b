@@ -29,4 +29,11 @@ public class CellTest {
         Cell cell = new CellImpl(CellType.MINE, "X");
         assertEquals(true, cell.isMine());
     }
+
+    @Test
+    public void trigger() {
+        Cell cell = new CellImpl(CellType.MINE, "X");
+        cell.trigger();
+        assertEquals(true, cell.isTriggered());
+    }
 }

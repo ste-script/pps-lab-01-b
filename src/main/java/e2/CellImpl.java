@@ -4,6 +4,7 @@ public class CellImpl implements Cell {
 
     private final CellType type;
     private final String text;
+    private boolean triggered;
 
     public CellImpl(CellType mine, String text) {
         this.type = mine;
@@ -12,17 +13,27 @@ public class CellImpl implements Cell {
 
     @Override
     public String getText() {
-        return text;
+        return this.text;
     }
 
     @Override
     public CellType getType() {
-        return type;
+        return this.type;
     }
 
     @Override
     public boolean isMine() {
-        return type == CellType.MINE;
+        return this.type == CellType.MINE;
+    }
+
+    @Override
+    public boolean isTriggered() {
+        return this.triggered;
+    }
+
+    @Override
+    public void trigger() {
+        this.triggered = true;
     }
 
 }
