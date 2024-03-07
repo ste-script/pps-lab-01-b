@@ -13,6 +13,7 @@ public class LogicsImpl implements Logics {
         this.numberOfMines = calculateNumberOfMines();
         this.grid = new GridImpl(size, this.numberOfMines);
         this.grid.randomizeGrid();
+        writeAdiacents();
     }
 
     public LogicsImpl(int size, int numberOfMines) {
@@ -21,6 +22,7 @@ public class LogicsImpl implements Logics {
         this.numberOfMines = numberOfMines;
         checkValidNumberOfMines();
         this.grid = new GridImpl(size, numberOfMines);
+        writeAdiacents();
     }
 
     private void checkValidNumberOfMines() {
@@ -65,6 +67,19 @@ public class LogicsImpl implements Logics {
         cell.trigger();
         if (!cell.isMine()) {
             recursiveTriggerAdiacentCells(position);
+        }
+    }
+
+    private void writeAdiacents() {
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                var cell = this.grid.getCell(new Pair<>(i, j));
+                if (!cell.isMine()) {
+                    cell.setText(String.valueOf(this.grid.getNumberOfAdiacentMines(new Pair<>(i, j))));
+                } else {
+                    cell.setText("*");
+                }
+            }
         }
     }
 

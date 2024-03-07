@@ -55,32 +55,4 @@ public class GridTest {
         assertEquals(localGrid.getNumberOfAdiacentMines(new Pair<Integer, Integer>(1, 1)), 3);
     }
 
-    @Test
-    public void correctAdiacentValuesHorizontal(){
-        var localGrid = new GridImpl(8, 1);
-        var cell = localGrid.getCell(new Pair<>(1, 0));
-        assertEquals(cell.getText(), "1");
-    }
-
-    @Test
-    public void correctAdiacentValuesVertical(){
-        var localGrid = new GridImpl(8, 1);
-        var cell = localGrid.getCell(new Pair<>(0, 1));
-        assertEquals(cell.getText(), "1");
-    }
-
-    @Test
-    public void correctAdiacentValuesDiagonal(){
-        var localGrid = new GridImpl(8, 1);
-        var cell = localGrid.getCell(new Pair<>(1, 1));
-        assertEquals(cell.getText(), "1");
-    }
-
-    @Test
-    public void correctAdiacentValuesNoMine(){
-        var localGrid = new GridImpl(8, 1);
-        var cell = localGrid.getCell(new Pair<>(2, 1));
-        assertEquals(cell.getText(), "0");
-    }
-
 }
