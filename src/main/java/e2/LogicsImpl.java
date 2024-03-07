@@ -76,8 +76,6 @@ public class LogicsImpl implements Logics {
                     var cell = this.grid.getCell(cellPosition);
                     if (!cell.isTriggered() && !cell.isMine()) {
                         cell.trigger();
-                        cell.setText(Integer.toString(this.grid.getNumberOfAdiacentMines(cellPosition)));
-
                         if (grid.getNumberOfAdiacentMines(new Pair<Integer, Integer>(i, j)) == 0) {
                             recursiveTriggerAdiacentCells(cellPosition);
                         }
